@@ -78,8 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class QRViewExample extends StatefulWidget {
+  const QRViewExample({super.key});
+
   @override
-  _QRViewExampleState createState() => _QRViewExampleState();
+  State<QRViewExample> createState() => _QRViewExampleState();
 }
 
 class _QRViewExampleState extends State<QRViewExample> {
