@@ -69,27 +69,6 @@ class _TodoListPageState extends State<TodoListPage> {
   }
 }
 
-class TodoEditPage extends StatefulWidget {
-  TodoEditPage({super.key, required this.todo});
-
-  Todo todo;
-
-  @override
-  State<TodoEditPage> createState() => _TodoEditPageState();
-}
-
-class _TodoEditPageState extends State<TodoEditPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("edit page"),
-      ),
-      body: Container(child: Text("aaaa")),
-    );
-  }
-}
-
 class Todo {
   final String id;
   final String title;
@@ -167,6 +146,27 @@ class TodoItem extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class TodoEditPage extends StatefulWidget {
+  TodoEditPage({super.key, required this.todo});
+
+  Todo todo;
+
+  @override
+  State<TodoEditPage> createState() => _TodoEditPageState();
+}
+
+class _TodoEditPageState extends State<TodoEditPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("edit page"),
+      ),
+      body: Container(child: Text("aaaa")),
     );
   }
 }
