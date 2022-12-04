@@ -20,21 +20,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Todo list'),
+      home: const TodoListPage(title: 'Todo list'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class TodoListPage extends StatefulWidget {
+  const TodoListPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<TodoListPage> createState() => _TodoListPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _TodoListPageState extends State<TodoListPage> {
   List<Todo> todos = [
     Todo("0602a18c-e3cf-4ff8-bb66-b9c9305e9875", "title1", "description1",
         "2022-12-01 10:24:56", "2022-11-01 10:24:56"),
