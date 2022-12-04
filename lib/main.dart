@@ -183,6 +183,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
                 )
               ],
             ),
+            const Divider(),
             Row(
               // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -199,6 +200,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
                 )
               ],
             ),
+            const Divider(),
             Row(
               children: [
                 const Expanded(child: Text("Limit", style: textStyle)),
@@ -211,6 +213,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
                 )
               ],
             ),
+            const Divider(),
             Row(
               children: [
                 const Expanded(
