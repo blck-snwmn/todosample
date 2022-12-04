@@ -62,11 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: ListView.builder(
           itemCount: todos.length,
-          itemBuilder: ((context, index) => TodoItem(
-              title: todos[index].title,
-              description: todos[index].description,
-              limit: todos[index].limit,
-              createdAt: todos[index].createdAt)),
+          itemBuilder: ((context, index) => TodoItem(todo: todos[index])),
         ),
       ),
     );
@@ -83,17 +79,9 @@ class Todo {
 }
 
 class TodoItem extends StatelessWidget {
-  final String title;
-  final String description;
-  final String limit;
-  final String createdAt;
+  final Todo todo;
 
-  const TodoItem(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.limit,
-      required this.createdAt});
+  const TodoItem({super.key, required this.todo});
 
   @override
   Widget build(BuildContext context) {
@@ -103,19 +91,19 @@ class TodoItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title,
+            todo.title,
             style: const TextStyle(fontSize: 25.0),
           ),
           Text(
-            description,
+            todo.description,
             style: const TextStyle(fontSize: 15.0),
           ),
           Row(
             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text("limit: $limit"),
+              Text("limit: $todo.limit"),
               const Spacer(),
-              Text("created_at: $createdAt"),
+              Text("created_at: $todo.createdAt"),
               const Spacer(),
             ],
           ),
