@@ -78,7 +78,7 @@ class Todo {
   final String limit;
   final String createdAt;
 
-  Todo(this.title, this.description, this.limit, this.createdAt, this.id);
+  Todo(this.id, this.title, this.description, this.limit, this.createdAt);
 }
 
 class TodoItem extends StatelessWidget {
