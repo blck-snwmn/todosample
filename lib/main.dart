@@ -20,15 +20,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const TodoListPage(title: 'Todo list'),
+      home: const TodoListPage(),
     );
   }
 }
 
 class TodoListPage extends StatefulWidget {
-  const TodoListPage({super.key, required this.title});
-
-  final String title;
+  const TodoListPage({super.key});
 
   @override
   State<TodoListPage> createState() => _TodoListPageState();
@@ -58,7 +56,7 @@ class _TodoListPageState extends State<TodoListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("Todo list"),
       ),
       body: Center(
         child: SlidableAutoCloseBehavior(
