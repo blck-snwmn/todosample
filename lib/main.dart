@@ -118,29 +118,30 @@ class TodoItem extends StatelessWidget {
         ],
       ),
       child: Card(
-          // margin: const EdgeInsets.all(4.0),
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            todo.title,
-            style: const TextStyle(fontSize: 25.0),
-          ),
-          Text(
-            todo.description,
-            style: const TextStyle(fontSize: 15.0),
-          ),
-          Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text("limit: $todo.limit"),
-              const Spacer(),
-              Text("created_at: $todo.createdAt"),
-              const Spacer(),
-            ],
-          ),
-        ],
-      )),
+        // margin: const EdgeInsets.all(4.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              todo.title,
+              style: const TextStyle(fontSize: 25.0),
+            ),
+            Text(
+              todo.description,
+              style: const TextStyle(fontSize: 15.0),
+            ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text("limit: $todo.limit"),
+                const Spacer(),
+                Text("created_at: $todo.createdAt"),
+                const Spacer(),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
