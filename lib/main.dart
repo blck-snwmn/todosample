@@ -34,7 +34,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  List<Todo> todos = [
+    Todo(
+        "title1", "description1", "2022-12-01 10:24:56", "2022-11-01 10:24:56"),
+    Todo(
+        "title2", "description2", "2022-12-02 10:24:56", "2022-11-02 10:24:56"),
+    Todo(
+        "title3", "description3", "2022-12-03 10:24:56", "2022-11-03 10:24:56"),
+    Todo(
+        "title4", "description4", "2022-12-04 10:24:56", "2022-11-04 10:24:56"),
+    Todo(
+        "title5", "description5", "2022-12-05 10:24:56", "2022-11-05 10:24:56"),
+    Todo(
+        "title6", "description6", "2022-12-06 10:24:56", "2022-11-06 10:24:56"),
+    Todo(
+        "title7", "description7", "2022-12-07 10:24:56", "2022-11-07 10:24:56"),
+    Todo(
+        "title8", "description8", "2022-12-08 10:24:56", "2022-11-08 10:24:56"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -43,20 +60,40 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: ListView(
-          children: <Widget>[
-            TodoItem(),
-            TodoItem(),
-            TodoItem(),
-          ],
+        child: ListView.builder(
+          itemCount: todos.length,
+          itemBuilder: ((context, index) => TodoItem(
+              title: todos[index].title,
+              description: todos[index].description,
+              limit: todos[index].limit,
+              createdAt: todos[index].createdAt)),
         ),
       ),
     );
   }
 }
 
+class Todo {
+  final String title;
+  final String description;
+  final String limit;
+  final String createdAt;
+
+  Todo(this.title, this.description, this.limit, this.createdAt);
+}
+
 class TodoItem extends StatelessWidget {
-  const TodoItem({super.key});
+  final String title;
+  final String description;
+  final String limit;
+  final String createdAt;
+
+  const TodoItem(
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.limit,
+      required this.createdAt});
 
   @override
   Widget build(BuildContext context) {
@@ -65,20 +102,21 @@ class TodoItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "this is todo title",
-            style: TextStyle(fontSize: 25.0),
+          Text(
+            title,
+            style: const TextStyle(fontSize: 25.0),
           ),
-          const Text(
-            "this is todo description",
-            style: TextStyle(fontSize: 15.0),
+          Text(
+            description,
+            style: const TextStyle(fontSize: 15.0),
           ),
           Row(
             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text("limit: 2022/05/12"),
-              Spacer(),
-              Text("created_at: 2022/05/11"),
+              Text("limit: $limit"),
+              const Spacer(),
+              Text("created_at: $createdAt"),
+              const Spacer(),
             ],
           ),
         ],
