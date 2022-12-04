@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,10 +61,11 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: ListView.builder(
+        child: SlidableAutoCloseBehavior(
+            child: ListView.builder(
           itemCount: todos.length,
           itemBuilder: ((context, index) => TodoItem(todo: todos[index])),
-        ),
+        )),
       ),
     );
   }
@@ -86,9 +88,38 @@ class TodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      // margin: const EdgeInsets.all(4.0),
-      child: Column(
+    return Slidable(
+      key: Key(todo.id),
+      startActionPane: ActionPane(
+        motion: const StretchMotion(),
+        dismissible: DismissiblePane(
+          onDismissed: () {
+            print("archived in dissmissed");
+          },
+        ),
+        children: [
+          SlidableAction(
+              backgroundColor: Colors.lightGreen,
+              foregroundColor: Colors.white,
+              icon: Icons.archive,
+              label: 'Archive',
+              onPressed: ((context) => {print("archived")})),
+        ],
+      ),
+      endActionPane: ActionPane(
+        motion: const StretchMotion(),
+        children: [
+          SlidableAction(
+              backgroundColor: Colors.lightBlue,
+              foregroundColor: Colors.white,
+              icon: Icons.save,
+              label: 'Save',
+              onPressed: ((context) => {print("saved")})),
+        ],
+      ),
+      child: Card(
+          // margin: const EdgeInsets.all(4.0),
+          child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -109,7 +140,7 @@ class TodoItem extends StatelessWidget {
             ],
           ),
         ],
-      ),
+      )),
     );
   }
 }
