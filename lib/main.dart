@@ -184,7 +184,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
               ],
             ),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Expanded(child: Text("Description", style: textStyle)),
                 Expanded(
