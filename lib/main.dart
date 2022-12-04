@@ -70,7 +70,9 @@ class _TodoListPageState extends State<TodoListPage> {
 }
 
 class TodoEditPage extends StatefulWidget {
-  const TodoEditPage({super.key});
+  TodoEditPage({super.key, required this.todo});
+
+  Todo todo;
 
   @override
   State<TodoEditPage> createState() => _TodoEditPageState();
@@ -133,9 +135,13 @@ class TodoItem extends StatelessWidget {
             label: 'Edit',
             onPressed: ((context) => {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const TodoEditPage()))
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TodoEditPage(
+                        todo: todo,
+                      ),
+                    ),
+                  )
                 }),
           ),
         ],
