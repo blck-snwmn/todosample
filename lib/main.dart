@@ -176,7 +176,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
               style: const TextStyle(fontSize: 20),
               textAlign: TextAlign.left,
             ),
-            Divider(),
+            const Divider(),
             TextField(
               controller: TextEditingController(text: widget.todo.title),
               style: const TextStyle(fontSize: 20),
