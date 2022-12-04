@@ -170,7 +170,6 @@ class _TodoEditPageState extends State<TodoEditPage> {
       body: SizedBox(
         width: double.infinity,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
