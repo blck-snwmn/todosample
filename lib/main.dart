@@ -112,9 +112,9 @@ class TodoItem extends StatelessWidget {
           SlidableAction(
               backgroundColor: Colors.lightBlue,
               foregroundColor: Colors.white,
-              icon: Icons.save,
-              label: 'Save',
-              onPressed: ((context) => {print("saved")})),
+              icon: Icons.edit,
+              label: 'Edit',
+              onPressed: ((context) => {print("edited")})),
         ],
       ),
       child: Card(
