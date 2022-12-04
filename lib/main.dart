@@ -166,7 +166,32 @@ class _TodoEditPageState extends State<TodoEditPage> {
       appBar: AppBar(
         title: const Text("edit page"),
       ),
-      body: Container(child: Text("aaaa")),
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "ID: ${widget.todo.id}",
+              style: const TextStyle(fontSize: 20),
+              textAlign: TextAlign.left,
+            ),
+            Divider(),
+            TextField(
+              controller: TextEditingController(text: widget.todo.title),
+              style: const TextStyle(fontSize: 20),
+            ),
+            TextField(
+              controller: TextEditingController(text: widget.todo.description),
+              style: const TextStyle(fontSize: 20),
+            ),
+            TextField(
+              controller: TextEditingController(text: widget.todo.limit),
+              style: const TextStyle(fontSize: 20),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
