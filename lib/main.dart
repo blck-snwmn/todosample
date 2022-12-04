@@ -172,7 +172,6 @@ class _TodoEditPageState extends State<TodoEditPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Divider(),
             Row(
               children: [
                 const Expanded(child: Text("Title", style: textStyle)),
