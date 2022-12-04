@@ -69,6 +69,25 @@ class _TodoListPageState extends State<TodoListPage> {
   }
 }
 
+class TodoEditPage extends StatefulWidget {
+  const TodoEditPage({super.key});
+
+  @override
+  State<TodoEditPage> createState() => _TodoEditPageState();
+}
+
+class _TodoEditPageState extends State<TodoEditPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("edit page"),
+      ),
+      body: Container(child: Text("aaaa")),
+    );
+  }
+}
+
 class Todo {
   final String id;
   final String title;
@@ -108,11 +127,17 @@ class TodoItem extends StatelessWidget {
         motion: const StretchMotion(),
         children: [
           SlidableAction(
-              backgroundColor: Colors.lightBlue,
-              foregroundColor: Colors.white,
-              icon: Icons.edit,
-              label: 'Edit',
-              onPressed: ((context) => {print("edited")})),
+            backgroundColor: Colors.lightBlue,
+            foregroundColor: Colors.white,
+            icon: Icons.edit,
+            label: 'Edit',
+            onPressed: ((context) => {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TodoEditPage()))
+                }),
+          ),
         ],
       ),
       child: Card(
