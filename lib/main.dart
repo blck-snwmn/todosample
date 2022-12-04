@@ -162,6 +162,7 @@ class TodoEditPage extends StatefulWidget {
 class _TodoEditPageState extends State<TodoEditPage> {
   @override
   Widget build(BuildContext context) {
+    const textStyle = TextStyle(fontSize: 20);
     return Scaffold(
       appBar: AppBar(
         title: const Text("edit page"),
@@ -171,23 +172,62 @@ class _TodoEditPageState extends State<TodoEditPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "ID: ${widget.todo.id}",
-              style: const TextStyle(fontSize: 20),
-              textAlign: TextAlign.left,
-            ),
             const Divider(),
-            TextField(
-              controller: TextEditingController(text: widget.todo.title),
-              style: const TextStyle(fontSize: 20),
+            Row(
+              children: [
+                const Expanded(child: Text("Title", style: textStyle)),
+                Expanded(
+                  flex: 3,
+                  child: TextField(
+                    controller: TextEditingController(text: widget.todo.title),
+                    style: textStyle,
+                  ),
+                )
+              ],
             ),
-            TextField(
-              controller: TextEditingController(text: widget.todo.description),
-              style: const TextStyle(fontSize: 20),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Expanded(
+                    child: Text(
+                  "Description",
+                  style: textStyle,
+                )),
+                Expanded(
+                  flex: 3,
+                  child: TextField(
+                    controller:
+                        TextEditingController(text: widget.todo.description),
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 10,
+                    style: textStyle,
+                  ),
+                )
+              ],
             ),
-            TextField(
-              controller: TextEditingController(text: widget.todo.limit),
-              style: const TextStyle(fontSize: 20),
+            Row(
+              children: [
+                const Expanded(child: Text("Limit", style: textStyle)),
+                Expanded(
+                  flex: 3,
+                  child: TextField(
+                    controller: TextEditingController(text: widget.todo.limit),
+                    style: textStyle,
+                  ),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                const Expanded(
+                    child: Text("ID",
+                        style: TextStyle(fontSize: 20, color: Colors.grey))),
+                Expanded(
+                  flex: 3,
+                  child: Text(widget.todo.id,
+                      style: const TextStyle(fontSize: 20, color: Colors.grey)),
+                )
+              ],
             ),
           ],
         ),
