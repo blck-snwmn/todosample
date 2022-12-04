@@ -119,7 +119,7 @@ class TodoItem extends StatelessWidget {
       ),
       child: Card(
         // margin: const EdgeInsets.all(4.0),
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
