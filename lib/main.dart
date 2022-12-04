@@ -36,12 +36,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,27 +45,43 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: ListView(
           children: <Widget>[
-            QrImage(
-              data: 'This is a simple QR code',
-              version: QrVersions.auto,
-              size: 320,
-              gapless: false,
-            ),
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            SizedBox(width: 1000, height: 1000, child: QRViewExample()),
+            TodoItem(),
+            TodoItem(),
+            TodoItem(),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+    );
+  }
+}
+
+class TodoItem extends StatelessWidget {
+  const TodoItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      // margin: const EdgeInsets.all(4.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "this is todo title",
+            style: TextStyle(fontSize: 25.0),
+          ),
+          const Text(
+            "this is todo description",
+            style: TextStyle(fontSize: 15.0),
+          ),
+          Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text("limit: 2022/05/12"),
+              Spacer(),
+              Text("created_at: 2022/05/11"),
+            ],
+          ),
+        ],
       ),
     );
   }
