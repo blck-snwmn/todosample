@@ -165,18 +165,13 @@ class TodoItem extends StatelessWidget {
   }
 }
 
-class TodoEditPage extends StatefulWidget {
+class TodoEditPage extends ConsumerWidget {
   TodoEditPage({super.key, required this.todo});
 
   Todo todo;
 
   @override
-  State<TodoEditPage> createState() => _TodoEditPageState();
-}
-
-class _TodoEditPageState extends State<TodoEditPage> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const textStyle = TextStyle(fontSize: 20);
     return Scaffold(
       appBar: AppBar(
@@ -192,7 +187,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
                 Expanded(
                   flex: 3,
                   child: TextField(
-                    controller: TextEditingController(text: widget.todo.title),
+                    controller: TextEditingController(text: todo.title),
                     style: textStyle,
                   ),
                 )
@@ -206,8 +201,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
                 Expanded(
                   flex: 3,
                   child: TextField(
-                    controller:
-                        TextEditingController(text: widget.todo.description),
+                    controller: TextEditingController(text: todo.description),
                     keyboardType: TextInputType.multiline,
                     maxLines: 10,
                     style: textStyle,
@@ -222,7 +216,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
                 Expanded(
                   flex: 3,
                   child: TextField(
-                    controller: TextEditingController(text: widget.todo.limit),
+                    controller: TextEditingController(text: todo.limit),
                     style: textStyle,
                   ),
                 )
@@ -236,7 +230,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
                         style: TextStyle(fontSize: 20, color: Colors.grey))),
                 Expanded(
                   flex: 3,
-                  child: Text(widget.todo.id,
+                  child: Text(todo.id,
                       style: const TextStyle(fontSize: 20, color: Colors.grey)),
                 )
               ],
