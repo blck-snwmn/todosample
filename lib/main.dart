@@ -162,8 +162,19 @@ class TodoItem extends StatelessWidget {
                 todo.description,
                 style: const TextStyle(fontSize: 15.0),
               ),
-              Text("limit: ${todo.limit}"),
-              Text("created_at: ${todo.createdAt}"),
+              Row(
+                children: [
+                  const Spacer(),
+                  Expanded(
+                    flex: 1,
+                    child: Text("limit: ${todo.limit}"),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Text("created_at: ${todo.createdAt}"),
+                  )
+                ],
+              ),
             ],
           ),
         ),
