@@ -91,11 +91,24 @@ class TodoListPage extends ConsumerWidget {
         title: const Text("Todo list"),
       ),
       body: Center(
-        child: SlidableAutoCloseBehavior(
-            child: ListView.builder(
-          itemCount: todos.length,
-          itemBuilder: ((context, index) => TodoItem(todo: todos[index])),
-        )),
+        child: Column(children: [
+          Row(
+            children: [
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: ElevatedButton(
+                    onPressed: () {}, child: const Icon(Icons.add)),
+              )
+            ],
+          ),
+          Expanded(
+              child: SlidableAutoCloseBehavior(
+                  child: ListView.builder(
+            itemCount: todos.length,
+            itemBuilder: ((context, index) => TodoItem(todo: todos[index])),
+          ))),
+        ]),
       ),
     );
   }
