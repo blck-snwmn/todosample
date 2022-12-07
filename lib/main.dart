@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:uuid/uuid.dart';
 
 class Todo {
   final String id;
@@ -98,7 +99,15 @@ class TodoListPage extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: ElevatedButton(
-                    onPressed: () {}, child: const Icon(Icons.add)),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TodoAddPage(),
+                        ),
+                      );
+                    },
+                    child: const Icon(Icons.add)),
               )
             ],
           ),
@@ -294,6 +303,105 @@ class TodoEditPage extends ConsumerWidget {
                   onPressed: () {
                     ref.read(todosProvider.notifier).update(Todo(
                         todo.id, title, description, limit, todo.createdAt));
+                    Navigator.pop(context);
+                  },
+                  child: const Text("save"),
+                ),
+                const Spacer(),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TodoAddPage extends ConsumerWidget {
+  String title = "";
+  String description = "";
+  String limit = "";
+
+  TodoAddPage({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    const textStyle = TextStyle(fontSize: 20);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("edit page"),
+      ),
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                const Expanded(child: Text("Title", style: textStyle)),
+                Expanded(
+                  flex: 3,
+                  child: TextField(
+                    style: textStyle,
+                    onChanged: (value) {
+                      title = value;
+                    },
+                  ),
+                )
+              ],
+            ),
+            const Divider(),
+            Row(
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Expanded(child: Text("Description", style: textStyle)),
+                Expanded(
+                  flex: 3,
+                  child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 10,
+                    style: textStyle,
+                    onChanged: (value) {
+                      description = value;
+                    },
+                  ),
+                )
+              ],
+            ),
+            const Divider(),
+            Row(
+              children: [
+                const Expanded(child: Text("Limit", style: textStyle)),
+                Expanded(
+                  flex: 3,
+                  child: TextField(
+                    style: textStyle,
+                    onChanged: (value) {
+                      limit = value;
+                    },
+                  ),
+                )
+              ],
+            ),
+            const Divider(),
+            Row(
+              children: [
+                const Spacer(),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("cancel"),
+                ),
+                const Spacer(),
+                ElevatedButton(
+                  onPressed: () {
+                    if (title == "" || description == "" || limit == "") return;
+                    ref.read(todosProvider.notifier).addTodo(Todo(
+                        (const Uuid()).v4().toString(),
+                        title,
+                        description,
+                        limit,
+                        DateTime.now().toString()));
                     Navigator.pop(context);
                   },
                   child: const Text("save"),

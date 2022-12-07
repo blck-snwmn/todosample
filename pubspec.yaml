@@ -40,6 +40,7 @@ dependencies:
   qr_flutter: ^4.0.0
   flutter_slidable: ^2.0.0
   hooks_riverpod: ^2.1.1
+  uuid: ^3.0.7
 
 dev_dependencies:
   flutter_test:
