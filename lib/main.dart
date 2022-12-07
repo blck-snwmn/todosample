@@ -101,20 +101,20 @@ class TodoListPage extends ConsumerWidget {
   }
 }
 
-class TodoItem extends StatelessWidget {
+class TodoItem extends ConsumerWidget {
   final Todo todo;
 
   const TodoItem({super.key, required this.todo});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Slidable(
       key: Key(todo.id),
       startActionPane: ActionPane(
         motion: const StretchMotion(),
         dismissible: DismissiblePane(
           onDismissed: () {
-            print("archived in dissmissed");
+            ref.read(todosProvider.notifier).removeTodo(todo.id);
           },
         ),
         children: [
@@ -123,7 +123,8 @@ class TodoItem extends StatelessWidget {
               foregroundColor: Colors.white,
               icon: Icons.archive,
               label: 'Archive',
-              onPressed: ((context) => {print("archived")})),
+              onPressed: ((context) =>
+                  {ref.read(todosProvider.notifier).removeTodo(todo.id)})),
         ],
       ),
       endActionPane: ActionPane(
