@@ -8,11 +8,11 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class Todo {
-  String id;
-  String title;
-  String description;
-  String limit;
-  String createdAt;
+  final String id;
+  final String title;
+  final String description;
+  final String limit;
+  final String createdAt;
 
   Todo(this.id, this.title, this.description, this.limit, this.createdAt);
 }
@@ -173,9 +173,13 @@ class TodoItem extends StatelessWidget {
 }
 
 class TodoEditPage extends ConsumerWidget {
-  TodoEditPage({super.key, required this.todo});
+  final Todo todo;
 
-  Todo todo;
+  late String title = todo.title;
+  late String description = todo.description;
+  late String limit = todo.limit;
+
+  TodoEditPage({super.key, required this.todo});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -197,7 +201,7 @@ class TodoEditPage extends ConsumerWidget {
                     controller: TextEditingController(text: todo.title),
                     style: textStyle,
                     onChanged: (value) {
-                      todo.title = value;
+                      title = value;
                     },
                   ),
                 )
@@ -216,7 +220,7 @@ class TodoEditPage extends ConsumerWidget {
                     maxLines: 10,
                     style: textStyle,
                     onChanged: (value) {
-                      todo.description = value;
+                      description = value;
                     },
                   ),
                 )
@@ -232,7 +236,7 @@ class TodoEditPage extends ConsumerWidget {
                     controller: TextEditingController(text: todo.limit),
                     style: textStyle,
                     onChanged: (value) {
-                      todo.limit = value;
+                      limit = value;
                     },
                   ),
                 )
@@ -253,7 +257,8 @@ class TodoEditPage extends ConsumerWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                ref.read(todosProvider.notifier).update(todo);
+                ref.read(todosProvider.notifier).update(
+                    Todo(todo.id, title, description, limit, todo.createdAt));
               },
               child: const Text("save"),
             ),
