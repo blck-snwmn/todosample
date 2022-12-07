@@ -224,93 +224,114 @@ class TodoEditPage extends ConsumerWidget {
       ),
       body: SizedBox(
         width: double.infinity,
-        child: Column(
-          children: [
-            Row(
-              children: [
-                const Expanded(child: Text("Title", style: textStyle)),
-                Expanded(
-                  flex: 3,
-                  child: TextField(
-                    controller: TextEditingController(text: todo.title),
-                    style: textStyle,
-                    onChanged: (value) {
-                      title = value;
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  const Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
                     },
+                    child: const Text("cancel"),
                   ),
-                )
-              ],
-            ),
-            const Divider(),
-            Row(
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Expanded(child: Text("Description", style: textStyle)),
-                Expanded(
-                  flex: 3,
-                  child: TextField(
-                    controller: TextEditingController(text: todo.description),
-                    keyboardType: TextInputType.multiline,
-                    maxLines: 10,
-                    style: textStyle,
-                    onChanged: (value) {
-                      description = value;
+                  const Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      ref.read(todosProvider.notifier).update(Todo(
+                          todo.id, title, description, limit, todo.createdAt));
+                      Navigator.pop(context);
                     },
+                    child: const Text("save"),
                   ),
-                )
-              ],
-            ),
-            const Divider(),
-            Row(
-              children: [
-                const Expanded(child: Text("Limit", style: textStyle)),
-                Expanded(
-                  flex: 3,
-                  child: TextField(
-                    controller: TextEditingController(text: todo.limit),
-                    style: textStyle,
-                    onChanged: (value) {
-                      limit = value;
-                    },
+                  const Spacer(),
+                ],
+              ),
+              Row(
+                children: [
+                  const Expanded(child: Text("Title", style: textStyle)),
+                  Expanded(
+                    flex: 3,
+                    child: TextField(
+                      controller: TextEditingController(text: todo.title),
+                      style: textStyle,
+                      onChanged: (value) {
+                        title = value;
+                      },
+                    ),
+                  )
+                ],
+              ),
+              const Divider(),
+              Row(
+                // crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Expanded(child: Text("Description", style: textStyle)),
+                  Expanded(
+                    flex: 3,
+                    child: TextField(
+                      controller: TextEditingController(text: todo.description),
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 10,
+                      style: textStyle,
+                      onChanged: (value) {
+                        description = value;
+                      },
+                    ),
+                  )
+                ],
+              ),
+              const Divider(),
+              Row(
+                children: [
+                  const Expanded(child: Text("Limit", style: textStyle)),
+                  Expanded(
+                    flex: 3,
+                    child: TextField(
+                      controller: TextEditingController(text: todo.limit),
+                      style: textStyle,
+                      onChanged: (value) {
+                        limit = value;
+                      },
+                    ),
+                  )
+                ],
+              ),
+              const Divider(),
+              Row(
+                children: [
+                  const Expanded(
+                      child: Text("ID",
+                          style: TextStyle(fontSize: 20, color: Colors.grey))),
+                  Expanded(
+                    flex: 3,
+                    child: Text(todo.id,
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.grey)),
+                  )
+                ],
+              ),
+              Row(
+                children: [
+                  const Spacer(),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: QrImage(
+                        padding: const EdgeInsets.all(10),
+                        data: todo.id,
+                        foregroundColor: Colors.amberAccent,
+                        backgroundColor: Colors.blueGrey,
+                        version: QrVersions.auto,
+                      ),
+                    ),
                   ),
-                )
-              ],
-            ),
-            const Divider(),
-            Row(
-              children: [
-                const Expanded(
-                    child: Text("ID",
-                        style: TextStyle(fontSize: 20, color: Colors.grey))),
-                Expanded(
-                  flex: 3,
-                  child: Text(todo.id,
-                      style: const TextStyle(fontSize: 20, color: Colors.grey)),
-                )
-              ],
-            ),
-            Row(
-              children: [
-                const Spacer(),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text("cancel"),
-                ),
-                const Spacer(),
-                ElevatedButton(
-                  onPressed: () {
-                    ref.read(todosProvider.notifier).update(Todo(
-                        todo.id, title, description, limit, todo.createdAt));
-                    Navigator.pop(context);
-                  },
-                  child: const Text("save"),
-                ),
-                const Spacer(),
-              ],
-            ),
-          ],
+                  const Spacer(),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
