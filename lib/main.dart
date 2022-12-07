@@ -255,12 +255,26 @@ class TodoEditPage extends ConsumerWidget {
                 )
               ],
             ),
-            ElevatedButton(
-              onPressed: () {
-                ref.read(todosProvider.notifier).update(
-                    Todo(todo.id, title, description, limit, todo.createdAt));
-              },
-              child: const Text("save"),
+            Row(
+              children: [
+                const Spacer(),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("cancel"),
+                ),
+                const Spacer(),
+                ElevatedButton(
+                  onPressed: () {
+                    ref.read(todosProvider.notifier).update(Todo(
+                        todo.id, title, description, limit, todo.createdAt));
+                    Navigator.pop(context);
+                  },
+                  child: const Text("save"),
+                ),
+                const Spacer(),
+              ],
             ),
           ],
         ),
