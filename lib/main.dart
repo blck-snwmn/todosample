@@ -1,42 +1,63 @@
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todosample/todo.dart';
 import 'package:uuid/uuid.dart';
 
-class Todo {
-  final String id;
-  final String title;
-  final String description;
-  final String limit;
-  final String createdAt;
+// import 'package:freezed_annotation/freezed_annotation.dart';
+// part 'main.freezed.dart';
+// part 'main.g.dart';
 
-  Todo(this.id, this.title, this.description, this.limit, this.createdAt);
-}
+// @freezed
+// class Todo with _$Todo {
+//   // final String id;
+//   // final String title;
+//   // final String description;
+//   // final String limit;
+//   // final String createdAt;
+
+//   const factory Todo({
+//     required String id,
+//     required String title,
+//     required String description,
+//     required String limit,
+//     required String createdAt,
+//   }) = _Todo;
+
+//   // factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
+// }
 
 class TodosNotifier extends StateNotifier<List<Todo>> {
   TodosNotifier()
       : super([
-          Todo("0602a18c-e3cf-4ff8-bb66-b9c9305e9875", "title1", "description1",
-              "2022-12-01 10:24:56", "2022-11-01 10:24:56"),
-          Todo("d6d88985-5083-489c-a272-9ade30ee4cf7", "title2", "description2",
-              "2022-12-02 10:24:56", "2022-11-02 10:24:56"),
-          Todo("d0698996-6f42-4cc4-951d-812cbc6d9adb", "title3", "description3",
-              "2022-12-03 10:24:56", "2022-11-03 10:24:56"),
-          Todo("0602a18c-e3cf-4ff8-bb66-b9c9305e9875", "title4", "description4",
-              "2022-12-04 10:24:56", "2022-11-04 10:24:56"),
-          Todo("7ea8408f-438e-4484-9370-1949684bc952", "title5", "description5",
-              "2022-12-05 10:24:56", "2022-11-05 10:24:56"),
-          Todo("b52c9587-91f6-453e-be02-9a481641fad3", "title6", "description6",
-              "2022-12-06 10:24:56", "2022-11-06 10:24:56"),
-          Todo("1b1bd606-ade2-4c4a-b7a3-df50bffda96d", "title7", "description7",
-              "2022-12-07 10:24:56", "2022-11-07 10:24:56"),
-          Todo("fea42d00-f1c4-47a5-a37e-d715660912ac", "title8", "description8",
-              "2022-12-08 10:24:56", "2022-11-08 10:24:56"),
+          const Todo(
+              id: "0602a18c-e3cf-4ff8-bb66-b9c9305e9875",
+              title: "title1",
+              description: "description1",
+              limit: "2022-12-01 10:24:56",
+              createdAt: "2022-11-01 10:24:56"),
+          const Todo(
+              id: "0602a18c-e3cf-4ff8-bb66-b9c9305e9875",
+              title: "title2",
+              description: "description2",
+              limit: "2022-12-01 10:24:56",
+              createdAt: "2022-11-01 10:24:56"),
+          const Todo(
+              id: "0602a18c-e3cf-4ff8-bb66-b9c9305e9875",
+              title: "title3",
+              description: "description3",
+              limit: "2022-12-01 10:24:56",
+              createdAt: "2022-11-01 10:24:56"),
+          const Todo(
+              id: "0602a18c-e3cf-4ff8-bb66-b9c9305e9875",
+              title: "title4",
+              description: "description4",
+              limit: "2022-12-01 10:24:56",
+              createdAt: "2022-11-01 10:24:56"),
         ]);
 
   void addTodo(Todo todo) {
@@ -240,7 +261,12 @@ class TodoEditPage extends ConsumerWidget {
                   ElevatedButton(
                     onPressed: () {
                       ref.read(todosProvider.notifier).update(Todo(
-                          todo.id, title, description, limit, todo.createdAt));
+                            id: todo.id,
+                            title: title,
+                            description: description,
+                            limit: limit,
+                            createdAt: todo.createdAt,
+                          ));
                       Navigator.pop(context);
                     },
                     child: const Text("save"),
@@ -418,11 +444,12 @@ class TodoAddPage extends ConsumerWidget {
                   onPressed: () {
                     if (title == "" || description == "" || limit == "") return;
                     ref.read(todosProvider.notifier).addTodo(Todo(
-                        (const Uuid()).v4().toString(),
-                        title,
-                        description,
-                        limit,
-                        DateTime.now().toString()));
+                          id: (const Uuid()).v4().toString(),
+                          title: title,
+                          description: description,
+                          limit: limit,
+                          createdAt: DateTime.now().toString(),
+                        ));
                     Navigator.pop(context);
                   },
                   child: const Text("save"),
