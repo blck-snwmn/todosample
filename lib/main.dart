@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
 }
 
 class TodoListPage extends ConsumerWidget {
-  const TodoListPage({Key? key}) : super(key: key);
+  const TodoListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
