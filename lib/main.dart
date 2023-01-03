@@ -105,7 +105,7 @@ class TodoListPage extends ConsumerWidget {
                 padding: const EdgeInsets.all(10),
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.push<MaterialPageRoute>(
                         context,
                         MaterialPageRoute(
                           builder: (context) => TodoAddPage(),
@@ -164,7 +164,7 @@ class TodoItem extends ConsumerWidget {
             icon: Icons.edit,
             label: 'Edit',
             onPressed: ((context) => {
-                  Navigator.push(
+                  Navigator.push<MaterialPageRoute>(
                     context,
                     MaterialPageRoute(
                       builder: (context) => TodoEditPage(
