@@ -8,29 +8,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todosample/todo.dart';
 import 'package:uuid/uuid.dart';
 
-// import 'package:freezed_annotation/freezed_annotation.dart';
-// part 'main.freezed.dart';
-// part 'main.g.dart';
-
-// @freezed
-// class Todo with _$Todo {
-//   // final String id;
-//   // final String title;
-//   // final String description;
-//   // final String limit;
-//   // final String createdAt;
-
-//   const factory Todo({
-//     required String id,
-//     required String title,
-//     required String description,
-//     required String limit,
-//     required String createdAt,
-//   }) = _Todo;
-
-//   // factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
-// }
-
 class TodosNotifier extends Notifier<List<Todo>> {
   void addTodo(Todo todo) {
     state = [...state, todo];
