@@ -31,35 +31,7 @@ import 'package:uuid/uuid.dart';
 //   // factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
 // }
 
-class TodosNotifier extends StateNotifier<List<Todo>> {
-  TodosNotifier()
-      : super([
-          const Todo(
-              id: "0602a18c-e3cf-4ff8-bb66-b9c9305e9875",
-              title: "title1",
-              description: "description1",
-              limit: "2022-12-01 10:24:56",
-              createdAt: "2022-11-01 10:24:56"),
-          const Todo(
-              id: "0602a18c-e3cf-4ff8-bb66-b9c9305e9875",
-              title: "title2",
-              description: "description2",
-              limit: "2022-12-01 10:24:56",
-              createdAt: "2022-11-01 10:24:56"),
-          const Todo(
-              id: "0602a18c-e3cf-4ff8-bb66-b9c9305e9875",
-              title: "title3",
-              description: "description3",
-              limit: "2022-12-01 10:24:56",
-              createdAt: "2022-11-01 10:24:56"),
-          const Todo(
-              id: "0602a18c-e3cf-4ff8-bb66-b9c9305e9875",
-              title: "title4",
-              description: "description4",
-              limit: "2022-12-01 10:24:56",
-              createdAt: "2022-11-01 10:24:56"),
-        ]);
-
+class TodosNotifier extends Notifier<List<Todo>> {
   void addTodo(Todo todo) {
     state = [...state, todo];
   }
@@ -74,9 +46,39 @@ class TodosNotifier extends StateNotifier<List<Todo>> {
         if (st.id == todo.id) todo else st
     ];
   }
+
+  @override
+  List<Todo> build() {
+    return [
+      const Todo(
+          id: "0602a18c-e3cf-4ff8-bb66-b9c9305e9875",
+          title: "title1",
+          description: "description1",
+          limit: "2022-12-01 10:24:56",
+          createdAt: "2022-11-01 10:24:56"),
+      const Todo(
+          id: "0602a18c-e3cf-4ff8-bb66-b9c9305e9875",
+          title: "title2",
+          description: "description2",
+          limit: "2022-12-01 10:24:56",
+          createdAt: "2022-11-01 10:24:56"),
+      const Todo(
+          id: "0602a18c-e3cf-4ff8-bb66-b9c9305e9875",
+          title: "title3",
+          description: "description3",
+          limit: "2022-12-01 10:24:56",
+          createdAt: "2022-11-01 10:24:56"),
+      const Todo(
+          id: "0602a18c-e3cf-4ff8-bb66-b9c9305e9875",
+          title: "title4",
+          description: "description4",
+          limit: "2022-12-01 10:24:56",
+          createdAt: "2022-11-01 10:24:56"),
+    ];
+  }
 }
 
-final todosProvider = StateNotifierProvider<TodosNotifier, List<Todo>>((ref) {
+final todosProvider = NotifierProvider<TodosNotifier, List<Todo>>(() {
   return TodosNotifier();
 });
 
