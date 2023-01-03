@@ -7,8 +7,12 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todosample/todo.dart';
 import 'package:uuid/uuid.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class TodosNotifier extends Notifier<List<Todo>> {
+part 'main.g.dart';
+
+@riverpod
+class TodosNotifier extends _$TodosNotifier {
   void addTodo(Todo todo) {
     state = [...state, todo];
   }
@@ -55,9 +59,9 @@ class TodosNotifier extends Notifier<List<Todo>> {
   }
 }
 
-final todosProvider = NotifierProvider<TodosNotifier, List<Todo>>(() {
-  return TodosNotifier();
-});
+// final todosProvider = NotifierProvider<TodosNotifier, List<Todo>>(() {
+//   return TodosNotifier();
+// });
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -84,7 +88,7 @@ class TodoListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Todo リストの内容に変化があるとウィジェットが更新される
-    List<Todo> todos = ref.watch(todosProvider);
+    List<Todo> todos = ref.watch(todosNotifierProvider);
 
     // スクロール可能なリストビューで Todo リストの内容を表示
     return Scaffold(
@@ -136,7 +140,7 @@ class TodoItem extends ConsumerWidget {
         motion: const StretchMotion(),
         dismissible: DismissiblePane(
           onDismissed: () {
-            ref.read(todosProvider.notifier).removeTodo(todo.id);
+            ref.read(todosNotifierProvider.notifier).removeTodo(todo.id);
           },
         ),
         children: [
@@ -145,8 +149,9 @@ class TodoItem extends ConsumerWidget {
               foregroundColor: Colors.white,
               icon: Icons.archive,
               label: 'Archive',
-              onPressed: ((context) =>
-                  {ref.read(todosProvider.notifier).removeTodo(todo.id)})),
+              onPressed: ((context) => {
+                    ref.read(todosNotifierProvider.notifier).removeTodo(todo.id)
+                  })),
         ],
       ),
       endActionPane: ActionPane(
@@ -239,7 +244,7 @@ class TodoEditPage extends ConsumerWidget {
                   const Spacer(),
                   ElevatedButton(
                     onPressed: () {
-                      ref.read(todosProvider.notifier).update(Todo(
+                      ref.read(todosNotifierProvider.notifier).update(Todo(
                             id: todo.id,
                             title: title,
                             description: description,
@@ -422,7 +427,7 @@ class TodoAddPage extends ConsumerWidget {
                 ElevatedButton(
                   onPressed: () {
                     if (title == "" || description == "" || limit == "") return;
-                    ref.read(todosProvider.notifier).addTodo(Todo(
+                    ref.read(todosNotifierProvider.notifier).addTodo(Todo(
                           id: (const Uuid()).v4().toString(),
                           title: title,
                           description: description,
