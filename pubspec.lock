@@ -168,14 +168,14 @@ packages:
       name: custom_lint
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.5"
+    version: "0.2.12"
   custom_lint_core:
     dependency: transitive
     description:
       name: custom_lint_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.7"
+    version: "0.2.12"
   dart_style:
     dependency: transitive
     description:
@@ -229,7 +229,7 @@ packages:
       name: flutter_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   flutter_slidable:
     dependency: "direct main"
     description:
@@ -288,7 +288,7 @@ packages:
       name: hooks_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   http_multi_server:
     dependency: transitive
     description:
@@ -442,28 +442,28 @@ packages:
       name: riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   riverpod_analyzer_utils:
     dependency: transitive
     description:
       name: riverpod_analyzer_utils
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1"
+    version: "0.1.1"
   riverpod_annotation:
     dependency: "direct main"
     description:
       name: riverpod_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.1"
+    version: "2.0.0"
   riverpod_generator:
     dependency: "direct dev"
     description:
       name: riverpod_generator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.0"
+    version: "2.0.0"
   rxdart:
     dependency: transitive
     description:
@@ -610,5 +610,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.4 <3.0.0"
+  dart: ">=2.19.0 <3.0.0"
   flutter: ">=3.0.0"
