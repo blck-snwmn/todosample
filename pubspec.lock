@@ -449,21 +449,21 @@ packages:
       name: riverpod_analyzer_utils
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.1"
+    version: "0.3.0"
   riverpod_annotation:
     dependency: "direct main"
     description:
       name: riverpod_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.4"
+    version: "2.1.0"
   riverpod_generator:
     dependency: "direct dev"
     description:
       name: riverpod_generator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.6"
+    version: "2.2.0"
   rxdart:
     dependency: transitive
     description:
