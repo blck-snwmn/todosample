@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -7,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:todosample/app_router.dart';
 import 'package:todosample/todo.dart';
 import 'package:uuid/uuid.dart';
 
@@ -65,24 +66,27 @@ class TodosNotifier extends _$TodosNotifier {
 // });
 
 void main() {
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Todo App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const TodoListPage(),
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
     );
   }
 }
 
+@RoutePage()
 class TodoListPage extends ConsumerWidget {
   const TodoListPage({super.key});
 
@@ -105,12 +109,7 @@ class TodoListPage extends ConsumerWidget {
                 padding: const EdgeInsets.all(10),
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push<MaterialPageRoute>(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TodoAddPage(),
-                        ),
-                      );
+                      AutoRouter.of(context).push(TodoAddRoute());
                     },
                     child: const Icon(Icons.add)),
               )
@@ -163,16 +162,8 @@ class TodoItem extends ConsumerWidget {
             foregroundColor: Colors.white,
             icon: Icons.edit,
             label: 'Edit',
-            onPressed: ((context) => {
-                  Navigator.push<MaterialPageRoute>(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TodoEditPage(
-                        todo: todo,
-                      ),
-                    ),
-                  )
-                }),
+            onPressed: ((context) =>
+                {AutoRouter.of(context).push(TodoEditRoute(todo: todo))}),
           ),
         ],
       ),
@@ -212,6 +203,7 @@ class TodoItem extends ConsumerWidget {
   }
 }
 
+@RoutePage()
 class TodoEditPage extends ConsumerWidget {
   final Todo todo;
 
@@ -238,7 +230,7 @@ class TodoEditPage extends ConsumerWidget {
                   const Spacer(),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      AutoRouter.of(context).pop();
                     },
                     child: const Text("cancel"),
                   ),
@@ -252,7 +244,7 @@ class TodoEditPage extends ConsumerWidget {
                             limit: limit,
                             createdAt: todo.createdAt,
                           ));
-                      Navigator.pop(context);
+                      AutoRouter.of(context).pop();
                     },
                     child: const Text("save"),
                   ),
@@ -349,6 +341,7 @@ class TodoEditPage extends ConsumerWidget {
   }
 }
 
+@RoutePage()
 class TodoAddPage extends ConsumerWidget {
   String title = "";
   String description = "";
@@ -420,7 +413,7 @@ class TodoAddPage extends ConsumerWidget {
                 const Spacer(),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    AutoRouter.of(context).pop();
                   },
                   child: const Text("cancel"),
                 ),
@@ -435,7 +428,7 @@ class TodoAddPage extends ConsumerWidget {
                           limit: limit,
                           createdAt: DateTime.now().toString(),
                         ));
-                    Navigator.pop(context);
+                    AutoRouter.of(context).pop();
                   },
                   child: const Text("save"),
                 ),
