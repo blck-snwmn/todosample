@@ -19,7 +19,7 @@ dependencies:
   freezed_annotation: ^2.2.0
   riverpod: ^2.3.6
   riverpod_annotation: ^2.1.1
-  auto_route: ^7.6.0
+  auto_route: ^7.7.0
 
 dev_dependencies:
   flutter_test:
